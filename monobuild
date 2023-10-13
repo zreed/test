@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+SIZE=`wc -c $SCRIPT_DIR/tools/monobuild.jar | sed 's/^ *//' | cut -f1 -d' '`
+
+if [ $SIZE -lt 1000 ]; then
+    echo 'Install git-lfs and run `git lfs install` & `git lfs pull`'
+    exit 1
+fi
+
+PREVIOUS_TAG_FOR_COMPARE=$(git describe --tags --abbrev=0)
+echo "PREVIOUS_TAG_FOR_COMPARE=${PREVIOUS_TAG_FOR_COMPARE}"
+
+java -jar "$SCRIPT_DIR/tools/monobuild.jar" -t $PREVIOUS_TAG_FOR_COMPARE "$@"

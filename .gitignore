@@ -1,0 +1,8 @@
+# Put language specific ignores in <language>/.gitignore
+
+**/.DS_Store
+
+.idea
+**/*.swp
+
+*.iml

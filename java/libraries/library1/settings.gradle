@@ -1,0 +1,2 @@
+includeBuild '../library2'
+includeBuild '../library3'
