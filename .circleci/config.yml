@@ -22,10 +22,10 @@ jobs:
     steps:
       - checkout
       - init-git-lfs
-      - run
+      - run:
           name: Generate workflow
           command: ./monobuild graph
-      - run
+      - run:
           name: Output dependency graph
           command: cat /tmp/monobuild/graph.json
 
