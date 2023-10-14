@@ -1,5 +1,27 @@
 version: 2.1
 
+commands:
+  init-git-lfs:
+    description: "Initializes Git-LFS from cache"
+    steps:
+      - run:
+          name: Collect Git-LFS asset hashes
+          command: git lfs ls-files -l | cut -d' ' -f1 | sort > ~/.gitlfs-assets
+
+      - restore_cache:
+          name: Restore Git-LFS
+          key: v1-git-lfs-{{ checksum "~/.gitlfs-assets" }}
+
+      - run:
+          name: Git-LFS pull
+          command: git lfs pull
+
+      - save_cache:
+          name: "Cache Git-LFS"
+          key: v1-git-lfs-{{ checksum "~/.gitlfs-assets" }}
+          paths:
+            - .git/lfs
+
 jobs:
   build-java:
     resource_class: small
@@ -10,6 +32,8 @@ jobs:
       projectdir:
         type: string
     steps:
+      - checkout
+      - init-git-lfs
       - attach_workspace:
           at: /home/circleci
       - run:
