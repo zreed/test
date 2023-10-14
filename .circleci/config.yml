@@ -24,12 +24,14 @@ jobs:
       - init-git-lfs
       - run:
           name: Generate dependency graph
-          command: ./monobuild graph
+          command: |
+              ./monobuild circleci-workflow
+              cat .circleci/build.config.template /tmp/monobuild/circleci-workflow.yaml > /tmp/build.config.yaml
       - run:
           name: Output dependency graph
           command: cat /tmp/monobuild/graph.json
       - continuation/continue:
-          configuration_path: .circleci/workflow.config.yml
+          configuration_path: /tmp/build.config.yaml
 
 workflows:
   setup:

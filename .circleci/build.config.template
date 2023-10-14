@@ -51,25 +51,3 @@ jobs:
           paths:
             - << parameters.projectdir >>
 
-workflows:
-  build:
-    jobs:
-      - build-java:
-          name: build-library1
-          projectdir: java/libraries/library1
-          requires:
-            - build-library2
-            - build-library3
-      - build-java:
-          name: build-library2
-          projectdir: java/libraries/library2
-          requires: []
-      - build-java:
-          name: build-library3
-          projectdir: java/libraries/library3
-          requires: []
-      - build-java:
-          name: build-service1
-          projectdir: java/services/service1
-          requires:
-            - build-library1
