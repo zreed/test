@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-ls ../library1 ../library2 ../library3
+ls ../../libraries/library1 ../../libraries/library2 ../../libraries/library3
