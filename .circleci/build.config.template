@@ -57,5 +57,5 @@ jobs:
       - image: cimg/base
     steps:
       - run:
-        command: echo "Skipping build"
+          command: echo "Skipping build"
 
