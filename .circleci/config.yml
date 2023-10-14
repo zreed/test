@@ -1,0 +1,57 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  continuation: circleci/continuation@1.0.0
+
+jobs:
+  setup-pipeline:
+    resource_class: small
+    
+    docker:
+      - image: cimg/openjdk:11.0.20
+    
+    working_directory: ~/repo
+    
+    environment:
+      GIT_LFS_SKIP_SMUDGE: 1
+      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=75
+      TERM: dumb
+    
+    steps:
+      - checkout
+      - init-git-lfs
+      - run
+          name: Generate workflow
+          command: ./monobuild graph
+      - run
+          name: Output dependency graph
+          command: cat /tmp/monobuild/graph.json
+
+workflows:
+  setup-pipeline:
+    jobs:
+      - setup-pipeline
+
+commands:
+  init-git-lfs:
+    description: "Initializes Git-LFS from cache"
+    steps:
+      - run:
+          name: Collect Git-LFS asset hashes
+          command: git lfs ls-files -l | cut -d' ' -f1 | sort > ~/.gitlfs-assets
+
+      - restore_cache:
+          name: Restore Git-LFS
+          key: v1-git-lfs-{{ checksum "~/.gitlfs-assets" }}
+
+      - run:
+          name: Git-LFS pull
+          command: git lfs pull
+
+      - save_cache:
+          name: "Cache Git-LFS"
+          key: v1-git-lfs-{{ checksum "~/.gitlfs-assets" }}
+          paths:
+            - .git/lfs
