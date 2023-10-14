@@ -28,10 +28,6 @@ jobs:
       - run:
           name: Output dependency graph
           command: cat /tmp/monobuild/graph.json
-      - persist_to_workspace:
-          root: /home/circleci
-          paths:
-            - repo
       - continuation/continue:
           configuration_path: .circleci/workflow.config.yml
 
