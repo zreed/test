@@ -51,3 +51,11 @@ jobs:
           paths:
             - << parameters.projectdir >>
 
+  build-nothing:
+    resource_class: small
+    docker:
+      - image: cimg/base
+    steps:
+      - run:
+        command: echo "Skipping build"
+
