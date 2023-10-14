@@ -35,7 +35,7 @@ jobs:
       - checkout
       - init-git-lfs
       - attach_workspace:
-          at: /home/circleci
+          at: /home/circleci/repo
       - run:
           name: Build project
           command: |
