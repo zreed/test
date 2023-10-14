@@ -63,3 +63,8 @@ workflows:
           name: build-library3
           projectdir: java/libraries/library3
           requires: []
+      - build-java:
+          name: build-service1
+          projectdir: java/services/service1
+          requires:
+            - build-library1
