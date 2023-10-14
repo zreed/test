@@ -26,11 +26,12 @@ jobs:
           name: Generate dependency graph
           command: ./monobuild graph
       - run:
-          name: Generate dependency graph (reversed)
-          command: ./monobuild graph-reversed
-      - run:
           name: Output dependency graph
-          command: cat /tmp/monobuild/graph.json && cat /tmp/monobuild/graph-reversed.json
+          command: cat /tmp/monobuild/graph.json
+      - persist_to_workspace:
+          root: /home/circleci
+          paths:
+            - repo
       - continuation/finish
 
 workflows:
