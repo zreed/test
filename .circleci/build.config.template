@@ -54,7 +54,7 @@ jobs:
   build-nothing:
     resource_class: small
     docker:
-      - image: cimg/base
+      - image: cimg/base:current
     steps:
       - run:
           command: echo "Skipping build"
