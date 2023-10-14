@@ -42,7 +42,7 @@ jobs:
               cd << parameters.projectdir >>
               ./build.sh
       - persist_to_workspace:
-          root: /home/circleci
+          root: /home/circleci/repo
           paths:
             - << parameters.projectdir >>
 

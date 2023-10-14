@@ -6,7 +6,7 @@ orbs:
   continuation: circleci/continuation@1.0.0
 
 jobs:
-  setup-pipeline:
+  setup:
     resource_class: small
     
     docker:
@@ -36,9 +36,9 @@ jobs:
           configuration_path: .circleci/workflow.config.yml
 
 workflows:
-  setup-pipeline:
+  setup:
     jobs:
-      - setup-pipeline
+      - setup
 
 commands:
   init-git-lfs:
