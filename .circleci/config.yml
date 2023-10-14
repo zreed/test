@@ -32,7 +32,8 @@ jobs:
           root: /home/circleci
           paths:
             - repo
-      - continuation/finish
+      - continuation/continue:
+          configuration_path: .circleci/workflow.config.yml
 
 workflows:
   setup-pipeline:

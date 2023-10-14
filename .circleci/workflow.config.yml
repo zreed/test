@@ -1,0 +1,38 @@
+version: 2.1
+
+jobs:
+  build-java:
+    resource_class: small
+    docker:
+      - image: cimg/openjdk:11.0.20
+    working_directory: ~/repo
+    parameters:
+      projectdir:
+        type: string
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - run:
+          name: CD to project
+          command: cd << parameters.projectdir >>
+      - run:
+          name: Print current directory
+          command: pwd
+
+workflows:
+  build:
+    jobs:
+      - build-java:
+          name: build-library1
+          projectdir: java/libraries/library1
+          requires:
+            - build-library2
+            - build-library3
+      - build-java:
+          name: build-library2
+          projectdir: java/libraries/library2
+          requires: []
+      - build-java:
+          name: build-library3
+          projectdir: java/libraries/library3
+          requires: []
