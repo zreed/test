@@ -28,6 +28,7 @@ jobs:
       - run:
           name: Output dependency graph
           command: cat /tmp/monobuild/graph.json
+      - continuation/finish
 
 workflows:
   setup-pipeline:
