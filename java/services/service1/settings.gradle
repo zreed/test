@@ -1,1 +1,2 @@
 includeBuild '../../libraries/library1'
+includeBuild '../../libraries/library4'
