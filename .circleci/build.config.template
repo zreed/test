@@ -35,7 +35,7 @@ jobs:
       - checkout
       - init-git-lfs
       - attach_workspace:
-          at: /home/circleci/repo
+          at: $CIRCLE_WORKING_DIRECTORY
       - run:
           name: Build project
           command: |
@@ -47,7 +47,7 @@ jobs:
               cd << parameters.projectdir >>
               ./test.sh
       - persist_to_workspace:
-          root: /home/circleci/repo
+          root: $CIRCLE_WORKING_DIRECTORY
           paths:
             - << parameters.projectdir >>
 

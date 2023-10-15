@@ -1,0 +1,7 @@
+{
+    "jobs": {
+        "build-java" : {
+            "context": []
+        }
+    }
+}
