@@ -49,7 +49,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - << parameters.projectdir >>
+            - << parameters.projectdir >>/build
 
   build-nothing:
     resource_class: small

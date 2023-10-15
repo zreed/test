@@ -1,3 +1,4 @@
 #!/bin/sh -e
 
-touch test-artifact2
+mkdir build
+echo "This is a test artifact." > build/test-artifact
