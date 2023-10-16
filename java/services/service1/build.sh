@@ -2,4 +2,4 @@
 
 mkdir build
 
-ls ../../libraries/library1 ../../libraries/library2 ../../libraries/library3  ../../libraries/library4
+ls -l ../../libraries/library1 ../../libraries/library2 ../../libraries/library3  ../../libraries/library4

@@ -30,7 +30,7 @@ jobs:
     steps:
       - checkout
       - init-git-lfs
-      - persist_workspace:
+      - persist_to_workspace:
           root: ~/repo
           paths:
             - '*'
