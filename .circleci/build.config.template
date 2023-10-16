@@ -23,6 +23,18 @@ commands:
             - .git/lfs
 
 jobs:
+  initialize:
+    resource_class: small
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - init-git-lfs
+      - persist_workspace:
+          root: ~/repo
+          paths:
+            - '*'
+
   build-java:
     resource_class: small
     docker:
@@ -32,10 +44,11 @@ jobs:
       projectdir:
         type: string
     steps:
-      - checkout
-      - init-git-lfs
       - attach_workspace:
           at: ~/repo
+      - run:
+          name: List directory
+          command: ls -al
       - run:
           name: Build project
           command: |
