@@ -27,6 +27,7 @@ jobs:
     resource_class: small
     docker:
       - image: cimg/base:current
+    working_directory: ~/repo
     steps:
       - checkout
       - init-git-lfs
@@ -71,7 +72,13 @@ jobs:
     resource_class: small
     docker:
       - image: cimg/base:current
+    working_directory: ~/repo
     steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: List directory
+          command: ls -al
       - run:
           command: echo "Skipping build"
 
